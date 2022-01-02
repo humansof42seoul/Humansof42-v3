@@ -7,6 +7,7 @@ import { AdminModule } from "@adminjs/nestjs";
 import { User } from "./users/entities/user.entity";
 import adminjs from "adminjs";
 import { Database, Resource } from "@adminjs/typeorm";
+import { AuthModule } from "./auth/auth.module";
 
 adminjs.registerAdapter({ Database, Resource });
 @Module({
@@ -48,6 +49,7 @@ adminjs.registerAdapter({ Database, Resource });
       },
     }),
     UsersModule,
+    AuthModule,
   ],
 })
 export class AppModule { }
