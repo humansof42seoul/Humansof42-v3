@@ -1,5 +1,6 @@
 import { IsDate, IsEmail, IsNumber, IsString } from "class-validator";
 import {
+  BaseEntity,
   Column,
   CreateDateColumn,
   DeleteDateColumn,
@@ -12,7 +13,7 @@ import { userGrade } from "../utils/types";
 
 @Entity()
 @Unique(["email"])
-export class User {
+export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   @IsNumber()
   id!: number;

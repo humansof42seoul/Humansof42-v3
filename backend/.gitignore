@@ -1,4 +1,5 @@
 *.env.*
+/.adminjs
 
 # compiled output
 /dist
