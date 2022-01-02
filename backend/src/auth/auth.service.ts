@@ -21,8 +21,9 @@ export class AuthService {
     return user;
   }
 
-  async signIn(user: SigninUserDto) {
-    const payload = { email: user.email };
+  async signin(user: SigninUserDto) {
+    const userData = await this.usersService.findOneByEmail(user.email);
+    const payload = { email: user.email, role: userData.role };
     return { access_token: this.jwtService.sign(payload) };
   }
 }

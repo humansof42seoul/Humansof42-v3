@@ -9,7 +9,7 @@ import {
   Unique,
   UpdateDateColumn,
 } from "typeorm";
-import { userGrade } from "../utils/types";
+import { userRole } from "../utils/types";
 
 @Entity()
 @Unique(["email"])
@@ -32,7 +32,7 @@ export class User extends BaseEntity {
 
   @Column()
   @IsString()
-  grade!: userGrade;
+  role!: userRole;
 
   @Column()
   @IsString()

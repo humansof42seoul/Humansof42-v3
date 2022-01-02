@@ -14,7 +14,7 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import { regExpConstants } from "../utils/constants";
-import { userGrade } from "../utils/types";
+import { userRole } from "../utils/types";
 
 export class CreateUserDto {
   @ApiProperty({
@@ -49,7 +49,7 @@ export class CreateUserDto {
   @Column()
   @IsString()
   @IsNotEmpty()
-  readonly grade: userGrade;
+  readonly role: userRole;
 
   @ApiProperty({
     type: String,

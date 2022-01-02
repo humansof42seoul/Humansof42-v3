@@ -19,7 +19,7 @@ export class UsersService {
       email: createUserDto.email,
       nickname: createUserDto.nickname,
       profile: createUserDto.profile,
-      grade: createUserDto.grade,
+      role: createUserDto.role,
       password: password,
       created_at: new Date(),
       modified_at: new Date(),

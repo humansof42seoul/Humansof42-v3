@@ -6,12 +6,22 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from "@nestjs/common";
 import { UsersService } from "./users.service";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
-import { ApiOkResponse, ApiOperation } from "@nestjs/swagger";
+import {
+  ApiBearerAuth,
+  ApiOkResponse,
+  ApiOperation,
+  ApiTags,
+} from "@nestjs/swagger";
+import { Roles } from "src/auth/utils/roles.decorator";
+import { JwtAuthGuard } from "src/auth/guards/jwt-auth.guard";
+import { RolesGuard } from "src/auth/guards/roles.guard";
 
+@ApiTags("Users")
 @Controller("users")
 export class UsersController {
   constructor(private readonly usersService: UsersService) { }
@@ -22,10 +32,13 @@ export class UsersController {
   }
 
   @Get()
+  @Roles("admin", "h42")
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @ApiOperation({
     summary: "모든회원 조회 API",
     description: "모든회원 조회 API 입니다.",
   })
+  @ApiBearerAuth()
   @ApiOkResponse({ description: "조회 성공" })
   findAll() {
     return this.usersService.findAll();
@@ -50,11 +63,13 @@ export class UsersController {
     return this.usersService.update(+id, updateUserDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(":id")
   @ApiOperation({
     summary: "회원탈퇴 API",
     description: "회원탈퇴 API 입니다.",
   })
+  @ApiBearerAuth()
   remove(@Param("id") id: number) {
     return this.usersService.remove(+id);
   }
