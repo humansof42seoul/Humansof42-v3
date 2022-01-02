@@ -47,6 +47,11 @@ adminjs.registerAdapter({ Database, Resource });
         rootPath: "/admin",
         resources: [User],
       },
+      // auth: {
+      //   authenticate: null,
+      //   cookiePassword: "df",
+      //   cookieName: "asdf",
+      // },
     }),
     UsersModule,
     AuthModule,
