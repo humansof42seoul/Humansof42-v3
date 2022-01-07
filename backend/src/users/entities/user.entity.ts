@@ -1,5 +1,5 @@
 import { IsDate, IsEmail, IsNumber, IsString } from "class-validator";
-import { Post } from "src/post/entities/post.entity";
+import { Post } from "src/posts/entities/post.entity";
 import {
   BaseEntity,
   Column,

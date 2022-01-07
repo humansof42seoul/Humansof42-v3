@@ -8,7 +8,7 @@ import {
   Delete,
   UseGuards,
 } from "@nestjs/common";
-import { PostService } from "./post.service";
+import { PostsService } from "./posts.service";
 import { CreatePostDto } from "./dto/create-post.dto";
 import { UpdatePostDto } from "./dto/update-post.dto";
 import {
@@ -25,8 +25,8 @@ import { CurrentUser } from "src/users/users.decorator";
 
 @ApiTags("Posts")
 @Controller("post")
-export class PostController {
-  constructor(private readonly postService: PostService) { }
+export class PostsController {
+  constructor(private readonly postsService: PostsService) { }
 
   @Post()
   @ApiOperation({
@@ -37,7 +37,7 @@ export class PostController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   create(@Body() createPostDto: CreatePostDto, @CurrentUser() user: User) {
-    return this.postService.create(createPostDto, user);
+    return this.postsService.create(createPostDto, user);
   }
 
   @Get()
@@ -47,7 +47,7 @@ export class PostController {
   })
   @ApiOkResponse({ description: "조회 성공" })
   findAll() {
-    return this.postService.findAll();
+    return this.postsService.findAll();
   }
 
   @Get(":id")
@@ -57,7 +57,7 @@ export class PostController {
   })
   @ApiOkResponse({ description: "조회 성공" })
   findOne(@Param("id") id: number) {
-    return this.postService.findOne(+id);
+    return this.postsService.findOne(+id);
   }
 
   @Patch(":id")
@@ -66,7 +66,7 @@ export class PostController {
     description: "글 수정 API 입니다.",
   })
   update(@Param("id") id: number, @Body() updatePostDto: UpdatePostDto) {
-    return this.postService.update(+id, updatePostDto);
+    return this.postsService.update(+id, updatePostDto);
   }
 
   @UseGuards(JwtAuthGuard)
@@ -77,6 +77,6 @@ export class PostController {
   })
   @ApiBearerAuth()
   remove(@Param("id") id: number) {
-    return this.postService.remove(+id);
+    return this.postsService.remove(+id);
   }
 }
