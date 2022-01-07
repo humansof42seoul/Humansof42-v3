@@ -1,4 +1,5 @@
 import { IsDate, IsEmail, IsNumber, IsString } from "class-validator";
+import { Comment } from "src/comments/entities/comment.entity";
 import { Post } from "src/posts/entities/post.entity";
 import {
   BaseEntity,
@@ -54,4 +55,7 @@ export class User extends BaseEntity {
 
   @OneToMany(() => Post, (post) => post.id)
   posts: Post[];
+
+  @OneToMany(() => Comment, (comments) => comments.id)
+  comments: Comment[];
 }

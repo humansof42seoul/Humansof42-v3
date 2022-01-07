@@ -23,6 +23,8 @@ export class PostsService {
       type: createPostDto.type,
       title: createPostDto.title,
       content: createPostDto.content,
+      read_count: 0,
+      like_count: 0,
       author: author,
     });
     this.postsRepository.insert(newPost);
@@ -43,11 +45,19 @@ export class PostsService {
         "Post.title",
         "Post.content",
         "Post.read_count",
-        "post.like_count",
+        "Post.like_count",
         "author.nickname",
         "author.role",
       ])
       .getOne();
+    if (!post) {
+      throw new NotFoundException(`${id} not found.`);
+    }
+    return post;
+  }
+
+  async findOneById(id: number): Promise<Post> {
+    const post: Post = await this.postsRepository.findOne(id);
     if (!post) {
       throw new NotFoundException(`${id} not found.`);
     }

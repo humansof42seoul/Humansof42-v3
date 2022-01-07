@@ -1,13 +1,14 @@
 import { IsDate, IsNumber, IsString } from "class-validator";
 import { User } from "src/users/entities/user.entity";
+import { Comment } from "src/comments/entities/comment.entity";
 import {
   BaseEntity,
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
@@ -53,4 +54,7 @@ export class Post extends BaseEntity {
 
   @ManyToOne(() => User, (user) => user.posts, { onDelete: "CASCADE" })
   author!: User;
+
+  @OneToMany(() => Comment, (comments) => comments.id)
+  comments: Comment[];
 }

@@ -10,6 +10,7 @@ import { Database, Resource } from "@adminjs/typeorm";
 import { AuthModule } from "./auth/auth.module";
 import { PostsModule } from "./posts/posts.module";
 import { Post } from "./posts/entities/post.entity";
+import { CommentsModule } from "./comments/comments.module";
 
 adminjs.registerAdapter({ Database, Resource });
 @Module({
@@ -58,6 +59,7 @@ adminjs.registerAdapter({ Database, Resource });
     UsersModule,
     AuthModule,
     PostsModule,
+    CommentsModule,
   ],
 })
 export class AppModule { }
