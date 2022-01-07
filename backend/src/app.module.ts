@@ -8,6 +8,8 @@ import { User } from "./users/entities/user.entity";
 import adminjs from "adminjs";
 import { Database, Resource } from "@adminjs/typeorm";
 import { AuthModule } from "./auth/auth.module";
+import { PostModule } from "./post/post.module";
+import { Post } from "./post/entities/post.entity";
 
 adminjs.registerAdapter({ Database, Resource });
 @Module({
@@ -45,7 +47,7 @@ adminjs.registerAdapter({ Database, Resource });
     AdminModule.createAdmin({
       adminJsOptions: {
         rootPath: "/admin",
-        resources: [User],
+        resources: [User, Post],
       },
       // auth: {
       //   authenticate: null,
@@ -55,6 +57,7 @@ adminjs.registerAdapter({ Database, Resource });
     }),
     UsersModule,
     AuthModule,
+    PostModule,
   ],
 })
 export class AppModule { }
