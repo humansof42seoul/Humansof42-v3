@@ -1,10 +1,12 @@
 import { IsDate, IsEmail, IsNumber, IsString } from "class-validator";
+import { Post } from "src/post/entities/post.entity";
 import {
   BaseEntity,
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   Unique,
   UpdateDateColumn,
@@ -12,7 +14,7 @@ import {
 import { userRole } from "../utils/types";
 
 @Entity()
-@Unique(["email"])
+@Unique(["email", "nickname"])
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   @IsNumber()
@@ -49,4 +51,7 @@ export class User extends BaseEntity {
   @DeleteDateColumn()
   @IsDate()
   deleted_at?: Date;
+
+  @OneToMany(() => Post, (post) => post.id)
+  posts: Post[];
 }

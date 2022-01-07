@@ -1,18 +1,12 @@
 import { ApiProperty } from "@nestjs/swagger";
 import {
-  IsDate,
   IsEmail,
   IsNotEmpty,
   IsString,
   Matches,
   MinLength,
 } from "class-validator";
-import {
-  Column,
-  CreateDateColumn,
-  DeleteDateColumn,
-  UpdateDateColumn,
-} from "typeorm";
+import { Column } from "typeorm";
 import { regExpConstants } from "../utils/constants";
 import { userRole } from "../utils/types";
 
@@ -61,28 +55,4 @@ export class CreateUserDto {
   @MinLength(8)
   @Matches(regExpConstants.password)
   readonly password: string;
-
-  @ApiProperty({
-    type: Date,
-    description: "생성일자",
-  })
-  @CreateDateColumn()
-  @IsDate()
-  readonly created_at: Date;
-
-  @ApiProperty({
-    type: Date,
-    description: "수정일자",
-  })
-  @UpdateDateColumn()
-  @IsDate()
-  readonly modified_at: Date;
-
-  @ApiProperty({
-    type: Date,
-    description: "삭제일자",
-  })
-  @DeleteDateColumn()
-  @IsDate()
-  readonly deleted_at: Date;
 }

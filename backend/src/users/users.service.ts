@@ -3,7 +3,7 @@ import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { User } from "./entities/user.entity";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
+import { createQueryBuilder, Repository } from "typeorm";
 import { hashedPassword } from "./utils/bcrypt";
 
 @Injectable()
@@ -43,6 +43,17 @@ export class UsersService {
     const user: User = await this.usersRepository.findOne({ email });
     if (!user) {
       throw new NotFoundException(`${email} not found.`);
+    }
+    return user;
+  }
+
+  async findOneByNickname(nickname: string): Promise<unknown> {
+    const user = await createQueryBuilder("User")
+      .where("User.nickname = :nickname", { nickname: nickname })
+      .select(["User.nickname", "User.profile", "User.role"])
+      .getOne();
+    if (!user) {
+      throw new NotFoundException(`${nickname} not found.`);
     }
     return user;
   }

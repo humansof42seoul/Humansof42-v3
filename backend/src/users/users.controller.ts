@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from "@nestjs/common";
 import { UsersService } from "./users.service";
 import { CreateUserDto } from "./dto/create-user.dto";
@@ -27,31 +28,46 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) { }
 
   @Post()
+  @ApiOperation({
+    summary: "회원가입 API",
+    description: "회원가입 API 입니다.",
+  })
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
 
   @Get()
-  @Roles("admin", "h42")
-  @UseGuards(JwtAuthGuard, RolesGuard)
+  // @Roles("admin", "h42")
+  // @UseGuards(JwtAuthGuard, RolesGuard)
   @ApiOperation({
     summary: "모든회원 조회 API",
     description: "모든회원 조회 API 입니다.",
   })
-  @ApiBearerAuth()
+  // @ApiBearerAuth()
   @ApiOkResponse({ description: "조회 성공" })
   findAll() {
     return this.usersService.findAll();
   }
 
-  @Get(":id")
+  // @Get(":id")
+  // @ApiOperation({
+  //   summary: "개별회원 조회 API",
+  //   description: "개별회원 조회 API 입니다.",
+  // })
+  // @ApiOkResponse({ description: "조회 성공" })
+  // findOne(@Param("id") id: number) {
+  //   return this.usersService.findOne(+id);
+  // }
+
+  @Get(":nickname")
   @ApiOperation({
-    summary: "개별회원 조회 API",
-    description: "개별회원 조회 API 입니다.",
+    summary: "회원 조회 API",
+    description:
+      "회원 조회 API 입니다. unique 필드인 nickname 기반으로 검색합니다.",
   })
   @ApiOkResponse({ description: "조회 성공" })
-  findOne(@Param("id") id: number) {
-    return this.usersService.findOne(+id);
+  findOneByNickname(@Param("nickname") nickname: string) {
+    return this.usersService.findOneByNickname(nickname);
   }
 
   @Patch(":id")
