@@ -7,7 +7,7 @@ import {
   MinLength,
 } from "class-validator";
 import { Column } from "typeorm";
-import { regExpConstants } from "../utils/constants";
+import { REGEXP } from "../utils/constants";
 import { userRole } from "../utils/types";
 
 export class CreateUserDto {
@@ -22,11 +22,12 @@ export class CreateUserDto {
 
   @ApiProperty({
     type: String,
-    description: "닉네임",
+    description: "닉네임(영문 대소문자와 숫자, 3자~15자",
   })
   @Column()
   @IsString()
   @IsNotEmpty()
+  @Matches(REGEXP.NICKNAME)
   readonly nickname: string;
 
   @ApiProperty({
@@ -53,6 +54,6 @@ export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   @MinLength(8)
-  @Matches(regExpConstants.password)
+  @Matches(REGEXP.PASSWORD)
   readonly password: string;
 }

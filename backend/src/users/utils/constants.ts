@@ -1,7 +1,8 @@
-export const regExpConstants = {
-  password: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/,
+export const REGEXP = {
+  PASSWORD: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/,
+  NICKNAME: /^[A-Za-z0-9]{3,15}$/,
 };
 
-export const bcryptConstants = {
-  saltOrRounds: 10,
+export const BCRYPT = {
+  SALTORROUNDS: 10,
 };
