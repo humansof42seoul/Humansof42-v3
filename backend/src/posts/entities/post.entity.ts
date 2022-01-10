@@ -13,6 +13,7 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import { postType } from "../utils/types";
+import { Like } from "src/likes/entities/like.entity";
 
 @Entity()
 export class Post extends BaseEntity {
@@ -52,9 +53,12 @@ export class Post extends BaseEntity {
   @IsDate()
   deleted_at?: Date;
 
-  @ManyToOne(() => User, (user) => user.posts, { onDelete: "CASCADE" })
+  @ManyToOne(() => User, (user) => user.posts)
   author!: User;
 
   @OneToMany(() => Comment, (comments) => comments.id)
   comments: Comment[];
+
+  @OneToMany(() => Like, (likes) => likes.id)
+  likes: Like[];
 }

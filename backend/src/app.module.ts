@@ -11,6 +11,11 @@ import { AuthModule } from "./auth/auth.module";
 import { PostsModule } from "./posts/posts.module";
 import { Post } from "./posts/entities/post.entity";
 import { CommentsModule } from "./comments/comments.module";
+import { LikesModule } from "./likes/likes.module";
+import { Comment } from "./comments/entities/comment.entity";
+import { ScrapsModule } from "./scraps/scraps.module";
+import { Like } from "./likes/entities/like.entity";
+import { Scrap } from "./scraps/entities/scrap.entity";
 
 adminjs.registerAdapter({ Database, Resource });
 @Module({
@@ -48,7 +53,7 @@ adminjs.registerAdapter({ Database, Resource });
     AdminModule.createAdmin({
       adminJsOptions: {
         rootPath: "/admin",
-        resources: [User, Post],
+        resources: [User, Post, Comment, Like, Scrap],
       },
       // auth: {
       //   authenticate: null,
@@ -60,6 +65,8 @@ adminjs.registerAdapter({ Database, Resource });
     AuthModule,
     PostsModule,
     CommentsModule,
+    LikesModule,
+    ScrapsModule,
   ],
 })
 export class AppModule { }

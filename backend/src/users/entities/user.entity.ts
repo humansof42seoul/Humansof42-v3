@@ -1,6 +1,8 @@
 import { IsDate, IsEmail, IsNumber, IsString } from "class-validator";
 import { Comment } from "src/comments/entities/comment.entity";
+import { Like } from "src/likes/entities/like.entity";
 import { Post } from "src/posts/entities/post.entity";
+import { Scrap } from "src/scraps/entities/scrap.entity";
 import {
   BaseEntity,
   Column,
@@ -58,4 +60,10 @@ export class User extends BaseEntity {
 
   @OneToMany(() => Comment, (comments) => comments.id)
   comments: Comment[];
+
+  @OneToMany(() => Like, (likes) => likes.id)
+  likes: Like[];
+
+  @OneToMany(() => Scrap, (scraps) => scraps.id)
+  scraps: Scrap[];
 }
