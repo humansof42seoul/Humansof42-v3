@@ -16,6 +16,7 @@ import { Comment } from "./comments/entities/comment.entity";
 import { ScrapsModule } from "./scraps/scraps.module";
 import { Like } from "./likes/entities/like.entity";
 import { Scrap } from "./scraps/entities/scrap.entity";
+import { InterviewsModule } from "./interviews/interviews.module";
 
 adminjs.registerAdapter({ Database, Resource });
 @Module({
@@ -67,6 +68,7 @@ adminjs.registerAdapter({ Database, Resource });
     CommentsModule,
     LikesModule,
     ScrapsModule,
+    InterviewsModule,
   ],
 })
 export class AppModule { }
